@@ -1,12 +1,13 @@
 import React from 'react'
 
-import TextArea from './TextArea'
+import Input from './components/Input'
+import Preview from './components/Preview'
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App flex justify-center">
-      <TextArea />
-      <TextArea />
+      <Input />
+      <Preview />
     </div>
   )
 }
