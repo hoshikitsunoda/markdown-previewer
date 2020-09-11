@@ -1,16 +1,12 @@
 import React, { useReducer } from 'react'
 
+import Header from './components/Header'
 import Input from './components/Input'
 import Preview from './components/Preview'
 
-interface Markdown {
-  markdownText: string
-}
+import { Markdown, Action } from './types/types'
 
-interface initialContext {
-  type: 'UPDATE_MARKDOWN'
-  data: any
-}
+type ReducerFunc = (state: Markdown, action: Action) => Markdown
 
 const initialState = {
   markdownText: '',
@@ -21,11 +17,14 @@ export const MarkdownContext = React.createContext<{
   dispatch: React.Dispatch<any>
 }>({ state: initialState, dispatch: () => null })
 
-export const reducer = (state: Markdown, action: initialContext) => {
+export const reducer: ReducerFunc = (
+  state: Markdown = initialState,
+  action: Action
+) => {
   switch (action.type) {
     case 'UPDATE_MARKDOWN':
       return {
-        markdownText: action.data,
+        markdownText: action.payload,
       }
     default:
       return initialState
@@ -36,11 +35,14 @@ const App: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
-    <div className="App flex justify-center">
-      <MarkdownContext.Provider value={{ state, dispatch }}>
-        <Input />
-        <Preview />
-      </MarkdownContext.Provider>
+    <div className="App">
+      <Header />
+      <div className="flex justify-center">
+        <MarkdownContext.Provider value={{ state, dispatch }}>
+          <Input />
+          <Preview />
+        </MarkdownContext.Provider>
+      </div>
     </div>
   )
 }

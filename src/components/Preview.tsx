@@ -10,7 +10,7 @@ const Preview: React.FC = () => {
   return (
     <>
       <div
-        className={`flex-1 border border-gray-600 p-8 markdown prose`}
+        className={`flex-1 p-8 markdown prose border-t border-b border-gray-400`}
         dangerouslySetInnerHTML={{ __html: content }}
       ></div>
     </>
