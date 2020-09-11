@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import marked from 'marked'
 
+import { MarkdownContext } from '../App'
+
 const Preview: React.FC = () => {
-  const content: string = marked('# hello', { sanitize: true })
+  const { state } = useContext(MarkdownContext)
+  const content: string = marked(state.markdownText)
+
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: content }}></div>
-      <textarea
-        className={`flex-1 border border-gray-600 p-8 resize-none`}
-        name="textarea"
-        cols={30}
-        rows={30}
-      ></textarea>
+      <div
+        className={`flex-1 border border-gray-600 p-8 markdown prose`}
+        dangerouslySetInnerHTML={{ __html: content }}
+      ></div>
     </>
   )
 }

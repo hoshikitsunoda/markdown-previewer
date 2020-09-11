@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
+import { MarkdownContext } from '../App'
 
 const Input: React.FC = () => {
-  const [markdown, setMarkdown] = useState()
-
+  const { dispatch } = useContext(MarkdownContext)
   const inputChangeHandler = (event: any) => {
-    setMarkdown(event.target.value)
+    dispatch({ type: 'UPDATE_MARKDOWN', data: event.target.value })
   }
-
-  console.log(markdown)
 
   return (
     <>
